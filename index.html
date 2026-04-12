@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joudar Perfumes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e8d5a3;
+  --gold-dark: #a07840;
+  --cream: #f5f0e8;
+  --ivory: #faf8f3;
+  --deep: #1a1208;
+  --dark: #100e08;
+  --smoke: #2e2a20;
+  --text-muted: #8a7d6a;
+  --text-mid: #5a4e3c;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--deep);
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: all 0.25s ease;
+  opacity: 0.6;
+}
+body:hover .cursor { opacity: 1; }
+
+/* ─── LOADER ─── */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 80px;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 20px;
+  animation: loaderReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+.loader-line {
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  margin-top: 20px;
+  animation: lineExpand 1.2s ease forwards;
+  animation-delay: 0.6s;
+}
+.loader-sub {
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--gold-light);
+  margin-top: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 1s;
+}
+@keyframes loaderReveal {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes lineExpand {
+  to { width: 120px; }
+}
+@keyframes fadeUp {
+  to { opacity: 1; }
+}
+
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(250,248,243,0.95), transparent);
+  backdrop-filter: blur(6px);
+  animation: navSlide 1s ease forwards;
+  animation-delay: 2.4s;
+  opacity: 0;
+}
+@keyframes navSlide {
+  to { opacity: 1; }
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 10px;
+  color: var(--deep);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+.nav-links a:hover { color: var(--gold-dark); }
+.nav-links a:hover::after { width: 100%; }
+.nav-insta {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ─── HERO ─── */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+/* decorative gold rings */
+.hero-ring {
+  position: absolute;
+  border: 1px solid rgba(201, 169, 110, 0.18);
+  border-radius: 50%;
+  animation: ringPulse 8s ease-in-out infinite;
+}
+.hero-ring:nth-child(1) { width: 500px; height: 500px; animation-delay: 0s; }
+.hero-ring:nth-child(2) { width: 700px; height: 700px; animation-delay: 1.5s; }
+.hero-ring:nth-child(3) { width: 900px; height: 900px; animation-delay: 3s; }
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.03); }
+}
+
+/* floating particles */
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: float linear infinite;
+  opacity: 0;
+}
+@keyframes float {
+  0% { opacity: 0; transform: translateY(0) translateX(0); }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-600px) translateX(var(--drift)); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  opacity: 0;
+  animation: heroReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 2.2s;
+}
+@keyframes heroReveal {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-size: 9px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 10vw, 130px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  color: var(--deep);
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-dark);
+}
+
+.hero-subtitle {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 28px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 50px;
+  padding: 16px 40px;
+  border: 1px solid var(--gold);
+  color: var(--gold-dark);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s;
+}
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: -1;
+}
+.hero-cta:hover { color: var(--dark); }
+.hero-cta:hover::before { transform: scaleX(1); }
+
+/* scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 3.5s;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+.scroll-indicator span {
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─── MARQUEE BAND ─── */
+.marquee-band {
+  background: var(--deep);
+  padding: 16px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.marquee-item::after {
+  content: '◆';
+  font-size: 6px;
+  color: var(--gold-dark);
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-header {
+  text-align: center;
+  padding: 80px 60px 60px;
+}
+.section-eyebrow {
+  font-size: 9px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.section-eyebrow::before, .section-eyebrow::after {
+  content: '';
+  width: 50px;
+  height: 1px;
+  background: var(--gold-light);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 300;
+  color: var(--deep);
+  line-height: 1.1;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--gold-dark);
+}
+
+/* ─── CATALOG GRID ─── */
+.catalog {
+  padding: 0 60px 100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: #e0d8cc;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* wide catalog for 2 rows */
+.catalog-wrap {
+  background: #e0d8cc;
+  padding: 2px;
+  max-width: 1400px;
+  margin: 0 auto 2px;
+}
+.catalog-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+/* ─── CARD ─── */
+.card {
+  background: var(--ivory);
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 340px;
+  background: var(--cream);
+}
+.card-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,169,110,0.08) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover img {
+  transform: scale(1.06);
+}
+
+/* badge */
+.card-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(250,248,243,0.9);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+}
+.card:hover .card-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-content {
+  padding: 28px 28px 36px;
+  position: relative;
+}
+.card-number {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--deep);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.card-divider {
+  width: 30px;
+  height: 1px;
+  background: var(--gold-light);
+  margin-bottom: 16px;
+  transition: width 0.4s ease;
+}
+.card:hover .card-divider {
+  width: 60px;
+  background: var(--gold);
+}
+
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  margin-bottom: 20px;
+}
+.price-item {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(201,169,110,0.15);
+}
+.price-item span:last-child {
+  color: var(--gold-dark);
+  font-weight: 400;
+}
+
+.btn-notes {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 0;
+  transition: gap 0.3s ease;
+}
+.btn-notes::after {
+  content: '→';
+  transition: transform 0.3s ease;
+}
+.btn-notes:hover { gap: 12px; }
+.btn-notes:hover::after { transform: translateX(4px); }
+.btn-notes.active::after { content: '↑'; }
+
+.notes-panel {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--cream);
+  border-left: 2px solid var(--gold-light);
+  animation: slideDown 0.4s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.note-group {
+  margin-bottom: 14px;
+}
+.note-group:last-child { margin-bottom: 0; }
+.note-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.note-value {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* ─── STORY SECTION ─── */
+.story-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+  margin: 60px 0;
+}
+.story-visual {
+  background: var(--deep);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.story-visual-inner {
+  position: relative;
+  text-align: center;
+}
+.story-big-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 240px;
+  font-weight: 300;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201,169,110,0.2);
+  line-height: 1;
+  animation: letterFloat 6s ease-in-out infinite;
+}
+@keyframes letterFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.story-overlay-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.story-overlay-text span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold-light);
+  letter-spacing: 4px;
+}
+.story-content {
+  background: var(--cream);
+  padding: 80px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.story-content .section-eyebrow {
+  justify-content: flex-start;
+}
+.story-content .section-eyebrow::before { display: none; }
+.story-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 50px;
+  font-weight: 300;
+  color: var(--deep);
+  line-height: 1.1;
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+.story-heading em { font-style: italic; color: var(--gold-dark); }
+.story-text {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--text-mid);
+  letter-spacing: 0.5px;
+  max-width: 460px;
+}
+.story-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 40px;
+}
+.stat-item {}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--gold-dark);
+}
+.stat-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--deep);
+  color: var(--gold-light);
+  text-align: center;
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: 'JOUDAR';
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px;
+  font-weight: 300;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201,169,110,0.08);
+  white-space: nowrap;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 16px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.footer-tagline {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: 50px;
+}
+.footer-divider {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin: 0 auto 40px;
+}
+.footer-insta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-insta:hover { color: var(--gold); }
+.footer-insta-icon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--gold-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+.footer-insta:hover .footer-insta-icon {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--dark);
+}
+.footer-copy {
+  margin-top: 50px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(201,169,110,0.3);
+}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .catalog-inner { grid-template-columns: repeat(2, 1fr); }
+  nav { padding: 20px 30px; }
+  .nav-links { display: none; }
+  .story-section { grid-template-columns: 1fr; }
+  .story-visual { min-height: 300px; }
+}
+@media (max-width: 640px) {
+  .catalog-inner { grid-template-columns: 1fr; }
+  .hero-title { font-size: 52px; }
+  .story-content { padding: 50px 30px; }
+  .story-stats { flex-wrap: wrap; gap: 24px; }
+  footer { padding: 60px 30px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-logo">JOUDAR</div>
+  <div class="loader-line"></div>
+  <div class="loader-sub">The Art of Fragrance</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">JOUDAR</a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://instagram.com/joudar_perfumes" class="nav-insta">@joudar_perfumes</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Luxury Arabian Perfumery</div>
+    <h1 class="hero-title">
+      The Art of<br><em>Fragrance</em>
+    </h1>
+    <p class="hero-subtitle">Crafted for the Discerning Soul</p>
+    <a href="#collection" class="hero-cta">Explore Collection</a>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Discover</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- COLLECTION -->
+<section id="collection">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Our Signatures</div>
+    <h2 class="section-title">The <em>Collection</em></h2>
+  </div>
+
+  <div class="catalog-wrap">
+    <div class="catalog-inner" id="catalogGrid"></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section" id="story">
+  <div class="story-visual">
+    <div class="story-visual-inner">
+      <div class="story-big-letter">J</div>
+      <div class="story-overlay-text">
+        <span>Since 2020</span>
+      </div>
+    </div>
+  </div>
+  <div class="story-content">
+    <div class="section-eyebrow">Our Philosophy</div>
+    <h2 class="story-heading">Born from the<br><em>Essence</em> of Arabia</h2>
+    <p class="story-text">
+      Joudar Perfumes was born from a deep reverence for the ancient art of Arabian fragrance. Every bottle is a testament to the rare ingredients sourced from the finest corners of the world — from the agarwood forests of Southeast Asia to the rose valleys of Bulgaria.
+    </p>
+    <div class="story-stats">
+      <div class="stat-item">
+        <div class="stat-num">18+</div>
+        <div class="stat-label">Signatures</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Pure Oils</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Years of Craft</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-logo">JOUDAR</div>
+  <div class="footer-tagline">The Art of Fragrance</div>
+  <div class="footer-divider"></div>
+  <a href="https://instagram.com/joudar_perfumes" class="footer-insta">
+    <span class="footer-insta-icon">✦</span>
+    @joudar_perfumes
+  </a>
+  <div class="footer-copy">© 2025 Joudar Perfumes · Kozhikode, Kerala</div>
+</footer>
+
+<script>
+/* ─── DATA ─── */
+const perfumes = [
+  {
+    name: "Red Wood",
+    img: "images/redwood.png",
+    top: "Raspberry, Coffee Beans",
+    heart: "Red Rose",
+    base: "Tamarind, Agarwood"
+  },
+  {
+    name: "Dream Soul",
+    img: "images/dreamsoul.png",
+    top: "Lemon, Mint",
+    heart: "Agarwood",
+    base: "Cardamom, White Musk"
+  },
+  {
+    name: "Blue Mist",
+    img: "images/blue mist.png",
+    top: "Aquatic Notes, Citrus",
+    heart: "Violet, Iris",
+    base: "Cedarwood, Musk"
+  },
+  {
+    name: "Burberry Aura",
+    img: "images/burbery.png",
+    top: "Raspberry, Coffee Beans",
+    heart: "Red Rose",
+    base: "Tamarind, Agarwood"
+  },
+  {
+    name: "Lavender Oudh",
+    img: "images/lavender.png",
+    top: "Lavender, Bergamot",
+    heart: "Oud, Patchouli",
+    base: "Sandalwood, Amber"
+  },
+  {
+    name: "Apple Eaze",
+    img: "images/apple eaze.png",
+    top: "Apple, Citrus",
+    heart: "Jasmine, Peach",
+    base: "Musk, Vanilla"
+  },
+  {
+    name: "Coco Blast",
+    img: "images/cocoblast (2).png",
+    top: "Coconut, Citrus",
+    heart: "Tiare Flower",
+    base: "Sandalwood, Vanilla"
+  },
+  {
+    name: "One",
+    img: "images/one.png",
+    top: "Bergamot, Lemon",
+    heart: "Rose, Jasmine",
+    base: "Musk, Cedarwood"
+  },
+  {
+    name: "Imperial",
+    img: "images/Imperial (2).png",
+    top: "Saffron, Cardamom",
+    heart: "Agarwood, Rose",
+    base: "Amber, Sandalwood"
+  },
+  {
+    name: "Fruit Maxio",
+    img: "images/fruit maxio.png",
+    top: "Raspberry, Coffee Beans",
+    heart: "Red Rose",
+    base: "Tamarind, Agarwood"
+  },
+  {
+    name: "Wadi",
+    img: "images/wadi.png",
+    top: "Raspberry, Coffee Beans",
+    heart: "Red Rose",
+    base: "Tamarind, Agarwood"
+  },
+  {
+    name: "Oakridge",
+    img: "images/Oakridge.png",
+    top: "Saffron, Bergamot",
+    heart: "Agarwood, Bulgarian Rose",
+    base: "Tonka Beans, Amber, White Musk"
+  },
+  {
+    name: "Noir Dessert",
+    img: "images/Noir Dessert.png",
+    top: "Black Tea, White Musk",
+    heart: "Iris, Vanilla",
+    base: "Cedarwood, Coumarin, Amber"
+  },
+  {
+    name: "Farz",
+    img: "images/Farz.png",
+    top: "Grapefruit, Mandarin Orange",
+    heart: "Agarwood",
+    base: "Guaiac Wood"
+  },
+  {
+    name: "Aqua Mist",
+    img: "images/Aqua mist.png",
+    top: "Oakmoss, Sandalwood",
+    heart: "Musk, Amber",
+    base: "Geranium"
+  },
+  {
+    name: "Orchid Bloom",
+    img: "images/BrownOrchid.png",
+    top: "Jasmine, Black Currant",
+    heart: "Patchouli, Sandalwood, Dark Chocolate",
+    base: "Amber, Vanilla"
+  },
+  {
+    name: "Black Lexus",
+    img: "images/black lexus.png",
+    top: "Mango, Blood Orange",
+    heart: "Water Lily, Peony",
+    base: "Coconut, White Musk"
+  },
+  {
+    name: "Eco Forest",
+    img: "images/Eco forest.png",
+    top: "Tangerine, Lemon, Bergamot",
+    heart: "Mint, Jasmine",
+    base: "Orange Blossom, Ginger"
+  }
+];
+
+const prices = [
+  { ml: "20ML", price: "₹329" },
+  { ml: "30ML", price: "₹499" },
+  { ml: "50ML", price: "₹799" },
+  { ml: "100ML", price: "₹1499" }
+];
+
+/* ─── RENDER CARDS ─── */
+const grid = document.getElementById('catalogGrid');
+
+perfumes.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-img-wrap">
+      <img src="${p.img}" alt="${p.name}" loading="lazy">
+      <div class="card-badge">New</div>
+    </div>
+    <div class="card-content">
+      <div class="card-number">No.${String(i+1).padStart(2,'0')}</div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-divider"></div>
+      <div class="price-grid">
+        ${prices.map(pr => `<div class="price-item"><span>${pr.ml}</span><span>${pr.price}</span></div>`).join('')}
+      </div>
+      <button class="btn-notes" onclick="toggleNotes(this)">View Notes</button>
+      <div class="notes-panel">
+        <div class="note-group">
+          <div class="note-label">Top Notes</div>
+          <div class="note-value">${p.top}</div>
+        </div>
+        <div class="note-group">
+          <div class="note-label">Heart Notes</div>
+          <div class="note-value">${p.heart}</div>
+        </div>
+        <div class="note-group">
+          <div class="note-label">Base Notes</div>
+          <div class="note-value">${p.base}</div>
+        </div>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+/* ─── MARQUEE ─── */
+const marqueeItems = ['Luxury Fragrances','Arabian Perfumery','Pure Oud Oils','Handcrafted Blends','Rare Ingredients','Free Shipping Available','Authentic Attars','Premium Quality'];
+const track = document.getElementById('marqueeTrack');
+const repeated = [...marqueeItems, ...marqueeItems, ...marqueeItems];
+repeated.forEach(item => {
+  const el = document.createElement('span');
+  el.className = 'marquee-item';
+  el.textContent = item;
+  track.appendChild(el);
+});
+
+/* ─── CURSOR ─── */
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animateCursor() {
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+})();
+
+/* ─── LOADER ─── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 2800);
+});
+
+/* ─── NOTES TOGGLE ─── */
+function toggleNotes(btn) {
+  const panel = btn.nextElementSibling;
+  const isOpen = panel.style.display === 'block';
+  panel.style.display = isOpen ? 'none' : 'block';
+  btn.textContent = isOpen ? 'View Notes' : 'Hide Notes';
+  btn.classList.toggle('active', !isOpen);
+}
+
+/* ─── SCROLL REVEAL ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, idx) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, entry.target.dataset.delay || 0);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.card').forEach((card, i) => {
+  card.dataset.delay = (i % 3) * 120;
+  observer.observe(card);
+});
+
+/* ─── PARTICLES ─── */
+const hero = document.querySelector('.hero');
+for (let i = 0; i < 24; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const x = Math.random() * 100;
+  const dur = 8 + Math.random() * 12;
+  const delay = Math.random() * 10;
+  const drift = (Math.random() - 0.5) * 100;
+  p.style.cssText = `left:${x}%;bottom:0;--drift:${drift}px;animation-duration:${dur}s;animation-delay:${delay}s;`;
+  hero.appendChild(p);
+}
+</script>
+</body>
+</html>
