@@ -76,6 +76,7 @@ body:hover .cursor { opacity: 1; }
   justify-content: center;
   z-index: 9999;
   transition: opacity 1s ease, visibility 1s ease;
+  padding: 20px;
 }
 .loader.hide {
   opacity: 0;
@@ -83,12 +84,14 @@ body:hover .cursor { opacity: 1; }
 }
 .loader-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 80px;
+  font-size: clamp(36px, 12vw, 80px);
   font-weight: 300;
   color: var(--gold);
-  letter-spacing: 20px;
+  letter-spacing: clamp(8px, 4vw, 20px);
   animation: loaderReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   opacity: 0;
+  text-align: center;
+  white-space: nowrap;
 }
 .loader-line {
   width: 0;
@@ -99,20 +102,22 @@ body:hover .cursor { opacity: 1; }
   animation-delay: 0.6s;
 }
 .loader-sub {
-  font-size: 11px;
-  letter-spacing: 6px;
+  font-size: clamp(9px, 2.5vw, 11px);
+  letter-spacing: clamp(3px, 2vw, 6px);
   color: var(--gold-light);
   margin-top: 16px;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards;
   animation-delay: 1s;
+  text-align: center;
+  white-space: nowrap;
 }
 @keyframes loaderReveal {
   0% { opacity: 0; transform: translateY(30px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 @keyframes lineExpand {
-  to { width: 120px; }
+  to { width: min(120px, 30vw); }
 }
 @keyframes fadeUp {
   to { opacity: 1; }
@@ -201,7 +206,6 @@ nav {
   background: var(--ivory);
 }
 
-/* decorative gold rings */
 .hero-ring {
   position: absolute;
   border: 1px solid rgba(201, 169, 110, 0.18);
@@ -216,7 +220,6 @@ nav {
   50% { opacity: 0.7; transform: scale(1.03); }
 }
 
-/* floating particles */
 .particle {
   position: absolute;
   width: 2px;
@@ -240,6 +243,7 @@ nav {
   opacity: 0;
   animation: heroReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: 2.2s;
+  padding: 0 20px;
 }
 @keyframes heroReveal {
   0% { opacity: 0; transform: translateY(40px); }
@@ -262,6 +266,7 @@ nav {
   width: 40px;
   height: 1px;
   background: var(--gold);
+  flex-shrink: 0;
 }
 
 .hero-title {
@@ -314,7 +319,6 @@ nav {
 .hero-cta:hover { color: var(--dark); }
 .hero-cta:hover::before { transform: scaleX(1); }
 
-/* scroll indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 40px;
@@ -417,18 +421,7 @@ nav {
   color: var(--gold-dark);
 }
 
-/* ─── CATALOG GRID ─── */
-.catalog {
-  padding: 0 60px 100px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: #e0d8cc;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* wide catalog for 2 rows */
+/* ─── CATALOG ─── */
 .catalog-wrap {
   background: #e0d8cc;
   padding: 2px;
@@ -478,7 +471,6 @@ nav {
   transform: scale(1.06);
 }
 
-/* badge */
 .card-badge {
   position: absolute;
   top: 20px;
@@ -690,7 +682,6 @@ nav {
   gap: 48px;
   margin-top: 40px;
 }
-.stat-item {}
 .stat-num {
   font-family: 'Cormorant Garamond', serif;
   font-size: 42px;
@@ -783,7 +774,7 @@ footer::before {
   color: rgba(201,169,110,0.3);
 }
 
-/* ─── REVEAL ANIMATIONS ─── */
+/* ─── REVEAL ─── */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -808,23 +799,26 @@ footer::before {
   .story-content { padding: 50px 30px; }
   .story-stats { flex-wrap: wrap; gap: 24px; }
   footer { padding: 60px 30px; }
+  .hero-eyebrow { font-size: 8px; letter-spacing: 4px; gap: 10px; }
+  .hero-eyebrow::before, .hero-eyebrow::after { width: 20px; }
+  .hero-subtitle { letter-spacing: 3px; }
+  .hero-cta { padding: 14px 28px; font-size: 9px; letter-spacing: 3px; }
+  nav { padding: 16px 20px; }
+  .nav-logo { font-size: 22px; letter-spacing: 6px; }
 }
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- LOADER -->
 <div class="loader" id="loader">
   <div class="loader-logo">JOUDAR</div>
   <div class="loader-line"></div>
   <div class="loader-sub">The Art of Fragrance</div>
 </div>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">JOUDAR</a>
   <ul class="nav-links">
@@ -835,52 +829,41 @@ footer::before {
   <a href="https://instagram.com/joudar_perfumes" class="nav-insta">@joudar_perfumes</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-ring"></div>
   <div class="hero-ring"></div>
   <div class="hero-ring"></div>
-
   <div class="hero-content">
     <div class="hero-eyebrow">Luxury Arabian Perfumery</div>
-    <h1 class="hero-title">
-      The Art of<br><em>Fragrance</em>
-    </h1>
+    <h1 class="hero-title">The Art of<br><em>Fragrance</em></h1>
     <p class="hero-subtitle">Crafted for the Discerning Soul</p>
     <a href="#collection" class="hero-cta">Explore Collection</a>
   </div>
-
   <div class="scroll-indicator">
     <span>Discover</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-band">
   <div class="marquee-track" id="marqueeTrack"></div>
 </div>
 
-<!-- COLLECTION -->
 <section id="collection">
   <div class="section-header reveal">
     <div class="section-eyebrow">Our Signatures</div>
     <h2 class="section-title">The <em>Collection</em></h2>
   </div>
-
   <div class="catalog-wrap">
     <div class="catalog-inner" id="catalogGrid"></div>
   </div>
 </section>
 
-<!-- STORY -->
 <section class="story-section" id="story">
   <div class="story-visual">
     <div class="story-visual-inner">
       <div class="story-big-letter">J</div>
-      <div class="story-overlay-text">
-        <span>Since 2020</span>
-      </div>
+      <div class="story-overlay-text"><span>Since 2020</span></div>
     </div>
   </div>
   <div class="story-content">
@@ -906,7 +889,6 @@ footer::before {
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer id="contact">
   <div class="footer-logo">JOUDAR</div>
   <div class="footer-tagline">The Art of Fragrance</div>
@@ -919,149 +901,161 @@ footer::before {
 </footer>
 
 <script>
-/* ─── DATA ─── */
 const perfumes = [
   {
     name: "Red Wood",
     img: "images/redwood.png",
     top: "Raspberry, Coffee Beans",
     heart: "Red Rose",
-    base: "Tamarind, Agarwood"
+    base: "Tamarind, Agarwood",
+    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
   },
   {
     name: "Dream Soul",
     img: "images/dreamsoul.png",
     top: "Lemon, Mint",
     heart: "Agarwood",
-    base: "Cardamom, White Musk"
+    base: "Cardamom, White Musk",
+    prices: { "20ML": "₹399", "30ML": "₹599", "50ML": "₹999", "100ML": "₹1899" }
   },
   {
     name: "Blue Mist",
     img: "images/blue mist.png",
     top: "Aquatic Notes, Citrus",
     heart: "Violet, Iris",
-    base: "Cedarwood, Musk"
+    base: "Cedarwood, Musk",
+    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1349" }
   },
   {
     name: "Burberry Aura",
     img: "images/burbery.png",
     top: "Raspberry, Coffee Beans",
     heart: "Red Rose",
-    base: "Tamarind, Agarwood"
+    base: "Tamarind, Agarwood",
+    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
   },
   {
     name: "Lavender Oudh",
     img: "images/lavender.png",
     top: "Lavender, Bergamot",
     heart: "Oud, Patchouli",
-    base: "Sandalwood, Amber"
+    base: "Sandalwood, Amber",
+    prices: { "20ML": "₹399", "30ML": "₹599", "50ML": "₹899", "100ML": "₹1799" }
   },
   {
     name: "Apple Eaze",
     img: "images/apple eaze.png",
     top: "Apple, Citrus",
     heart: "Jasmine, Peach",
-    base: "Musk, Vanilla"
+    base: "Musk, Vanilla",
+    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
   },
   {
     name: "Coco Blast",
     img: "images/cocoblast (2).png",
     top: "Coconut, Citrus",
     heart: "Tiare Flower",
-    base: "Sandalwood, Vanilla"
+    base: "Sandalwood, Vanilla",
+    prices: { "20ML": "₹449", "30ML": "₹649", "50ML": "₹1099", "100ML": "₹1999" }
   },
   {
     name: "One",
     img: "images/one.png",
     top: "Bergamot, Lemon",
     heart: "Rose, Jasmine",
-    base: "Musk, Cedarwood"
+    base: "Musk, Cedarwood",
+    prices: { "20ML": "₹299", "30ML": "₹449", "50ML": "₹749", "100ML": "₹1399" }
   },
   {
     name: "Imperial",
     img: "images/Imperial (2).png",
     top: "Saffron, Cardamom",
     heart: "Agarwood, Rose",
-    base: "Amber, Sandalwood"
+    base: "Amber, Sandalwood",
+    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
   },
   {
     name: "Fruit Maxio",
     img: "images/fruit maxio.png",
     top: "Raspberry, Coffee Beans",
     heart: "Red Rose",
-    base: "Tamarind, Agarwood"
+    base: "Tamarind, Agarwood",
+    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
   },
   {
     name: "Wadi",
     img: "images/wadi.png",
     top: "Raspberry, Coffee Beans",
     heart: "Red Rose",
-    base: "Tamarind, Agarwood"
+    base: "Tamarind, Agarwood",
+    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
   },
   {
     name: "Oakridge",
     img: "images/Oakridge.png",
     top: "Saffron, Bergamot",
     heart: "Agarwood, Bulgarian Rose",
-    base: "Tonka Beans, Amber, White Musk"
+    base: "Tonka Beans, Amber, White Musk",
+    prices: { "20ML": "₹649", "30ML": "₹999", "50ML": "₹1499", "100ML": "₹2799" }
   },
   {
     name: "Noir Dessert",
     img: "images/Noir Dessert.png",
     top: "Black Tea, White Musk",
     heart: "Iris, Vanilla",
-    base: "Cedarwood, Coumarin, Amber"
+    base: "Cedarwood, Coumarin, Amber",
+    prices: { "20ML": "₹699", "30ML": "₹1099", "50ML": "₹1699", "100ML": "₹3199" }
   },
   {
     name: "Farz",
     img: "images/Farz.png",
     top: "Grapefruit, Mandarin Orange",
     heart: "Agarwood",
-    base: "Guaiac Wood"
+    base: "Guaiac Wood",
+    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
   },
   {
     name: "Aqua Mist",
     img: "images/Aqua mist.png",
     top: "Oakmoss, Sandalwood",
     heart: "Musk, Amber",
-    base: "Geranium"
+    base: "Geranium",
+    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
   },
   {
     name: "Orchid Bloom",
     img: "images/BrownOrchid.png",
     top: "Jasmine, Black Currant",
     heart: "Patchouli, Sandalwood, Dark Chocolate",
-    base: "Amber, Vanilla"
+    base: "Amber, Vanilla",
+    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1349" }
   },
   {
     name: "Black Lexus",
     img: "images/black lexus.png",
     top: "Mango, Blood Orange",
     heart: "Water Lily, Peony",
-    base: "Coconut, White Musk"
+    base: "Coconut, White Musk",
+    prices: { "20ML": "₹249", "30ML": "₹399", "50ML": "₹649", "100ML": "₹1199" }
   },
   {
     name: "Eco Forest",
     img: "images/Eco forest.png",
     top: "Tangerine, Lemon, Bergamot",
     heart: "Mint, Jasmine",
-    base: "Orange Blossom, Ginger"
+    base: "Orange Blossom, Ginger",
+    prices: { "20ML": "₹249", "30ML": "₹399", "50ML": "₹649", "100ML": "₹1199" }
   }
 ];
 
-const prices = [
-  { ml: "20ML", price: "₹329" },
-  { ml: "30ML", price: "₹499" },
-  { ml: "50ML", price: "₹799" },
-  { ml: "100ML", price: "₹1499" }
-];
-
-/* ─── RENDER CARDS ─── */
 const grid = document.getElementById('catalogGrid');
 
 perfumes.forEach((p, i) => {
   const card = document.createElement('div');
   card.className = 'card';
+  const priceHTML = Object.entries(p.prices)
+    .map(([ml, price]) => `<div class="price-item"><span>${ml}</span><span>${price}</span></div>`)
+    .join('');
   card.innerHTML = `
     <div class="card-img-wrap">
       <img src="${p.img}" alt="${p.name}" loading="lazy">
@@ -1071,9 +1065,7 @@ perfumes.forEach((p, i) => {
       <div class="card-number">No.${String(i+1).padStart(2,'0')}</div>
       <div class="card-name">${p.name}</div>
       <div class="card-divider"></div>
-      <div class="price-grid">
-        ${prices.map(pr => `<div class="price-item"><span>${pr.ml}</span><span>${pr.price}</span></div>`).join('')}
-      </div>
+      <div class="price-grid">${priceHTML}</div>
       <button class="btn-notes" onclick="toggleNotes(this)">View Notes</button>
       <div class="notes-panel">
         <div class="note-group">
@@ -1094,7 +1086,6 @@ perfumes.forEach((p, i) => {
   grid.appendChild(card);
 });
 
-/* ─── MARQUEE ─── */
 const marqueeItems = ['Luxury Fragrances','Arabian Perfumery','Pure Oud Oils','Handcrafted Blends','Rare Ingredients','Free Shipping Available','Authentic Attars','Premium Quality'];
 const track = document.getElementById('marqueeTrack');
 const repeated = [...marqueeItems, ...marqueeItems, ...marqueeItems];
@@ -1105,7 +1096,6 @@ repeated.forEach(item => {
   track.appendChild(el);
 });
 
-/* ─── CURSOR ─── */
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -1120,14 +1110,12 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
   requestAnimationFrame(animateCursor);
 })();
 
-/* ─── LOADER ─── */
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('loader').classList.add('hide');
   }, 2800);
 });
 
-/* ─── NOTES TOGGLE ─── */
 function toggleNotes(btn) {
   const panel = btn.nextElementSibling;
   const isOpen = panel.style.display === 'block';
@@ -1136,9 +1124,8 @@ function toggleNotes(btn) {
   btn.classList.toggle('active', !isOpen);
 }
 
-/* ─── SCROLL REVEAL ─── */
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, idx) => {
+  entries.forEach((entry) => {
     if (entry.isIntersecting) {
       setTimeout(() => {
         entry.target.classList.add('visible');
@@ -1149,13 +1136,11 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
 document.querySelectorAll('.card').forEach((card, i) => {
   card.dataset.delay = (i % 3) * 120;
   observer.observe(card);
 });
 
-/* ─── PARTICLES ─── */
 const hero = document.querySelector('.hero');
 for (let i = 0; i < 24; i++) {
   const p = document.createElement('div');
