@@ -20,16 +20,8 @@
   --text-mid: #5a4e3c;
 }
 
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   background: var(--ivory);
   color: var(--deep);
@@ -40,515 +32,104 @@ body {
 }
 
 /* ─── CUSTOM CURSOR ─── */
-.cursor {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--gold);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s;
-}
-.cursor-ring {
-  position: fixed;
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: all 0.25s ease;
-  opacity: 0.6;
-}
-body:hover .cursor { opacity: 1; }
+.cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: transform 0.1s; }
+.cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: all 0.25s ease; opacity: 0.6; }
 
 /* ─── LOADER ─── */
-.loader {
-  position: fixed;
-  inset: 0;
-  background: var(--dark);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  transition: opacity 1s ease, visibility 1s ease;
-  padding: 20px;
-}
-.loader.hide {
-  opacity: 0;
-  visibility: hidden;
-}
-.loader-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 12vw, 80px);
-  font-weight: 300;
-  color: var(--gold);
-  letter-spacing: clamp(8px, 4vw, 20px);
-  animation: loaderReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  opacity: 0;
-  text-align: center;
-  white-space: nowrap;
-}
-.loader-line {
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  margin-top: 20px;
-  animation: lineExpand 1.2s ease forwards;
-  animation-delay: 0.6s;
-}
-.loader-sub {
-  font-size: clamp(9px, 2.5vw, 11px);
-  letter-spacing: clamp(3px, 2vw, 6px);
-  color: var(--gold-light);
-  margin-top: 16px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards;
-  animation-delay: 1s;
-  text-align: center;
-  white-space: nowrap;
-}
-@keyframes loaderReveal {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes lineExpand {
-  to { width: min(120px, 30vw); }
-}
-@keyframes fadeUp {
-  to { opacity: 1; }
-}
+.loader { position: fixed; inset: 0; background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 1s ease, visibility 1s ease; padding: 20px; }
+.loader.hide { opacity: 0; visibility: hidden; }
+.loader-logo { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,12vw,80px); font-weight: 300; color: var(--gold); letter-spacing: clamp(8px,4vw,20px); animation: loaderReveal 1.6s cubic-bezier(0.22,1,0.36,1) forwards; opacity: 0; text-align: center; }
+.loader-line { width: 0; height: 1px; background: var(--gold); margin-top: 20px; animation: lineExpand 1.2s ease forwards; animation-delay: 0.6s; }
+.loader-sub { font-size: clamp(9px,2.5vw,11px); letter-spacing: clamp(3px,2vw,6px); color: var(--gold-light); margin-top: 16px; opacity: 0; animation: fadeUp 0.8s ease forwards; animation-delay: 1s; }
+@keyframes loaderReveal { 0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)} }
+@keyframes lineExpand { to{width:min(120px,30vw)} }
+@keyframes fadeUp { to{opacity:1} }
 
-/* ─── NOISE OVERLAY ─── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.4;
-}
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none; z-index:9998; opacity:0.4; }
 
 /* ─── NAV ─── */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 28px 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to bottom, rgba(250,248,243,0.95), transparent);
-  backdrop-filter: blur(6px);
-  animation: navSlide 1s ease forwards;
-  animation-delay: 2.4s;
-  opacity: 0;
-}
-@keyframes navSlide {
-  to { opacity: 1; }
-}
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 300;
-  letter-spacing: 10px;
-  color: var(--deep);
-  text-decoration: none;
-}
-.nav-links {
-  display: flex;
-  gap: 40px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--text-mid);
-  text-decoration: none;
-  position: relative;
-  transition: color 0.3s;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.4s ease;
-}
-.nav-links a:hover { color: var(--gold-dark); }
-.nav-links a:hover::after { width: 100%; }
-.nav-insta {
-  font-size: 10px;
-  letter-spacing: 3px;
-  color: var(--gold);
-  text-decoration: none;
-}
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; display:flex; align-items:center; justify-content:space-between; background:linear-gradient(to bottom,rgba(250,248,243,0.95),transparent); backdrop-filter:blur(6px); animation:navSlide 1s ease forwards; animation-delay:2.4s; opacity:0; }
+@keyframes navSlide { to{opacity:1} }
+.nav-logo { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; letter-spacing:10px; color:var(--deep); text-decoration:none; }
+.nav-links { display:flex; gap:40px; list-style:none; }
+.nav-links a { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--text-mid); text-decoration:none; position:relative; transition:color 0.3s; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.4s ease; }
+.nav-links a:hover { color:var(--gold-dark); }
+.nav-links a:hover::after { width:100%; }
+.nav-insta { font-size:10px; letter-spacing:3px; color:var(--gold); text-decoration:none; }
 
 /* ─── HERO ─── */
-.hero {
-  height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--ivory);
-}
+.hero { height:100vh; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; background:var(--ivory); }
+.hero-ring { position:absolute; border:1px solid rgba(201,169,110,0.18); border-radius:50%; animation:ringPulse 8s ease-in-out infinite; }
+.hero-ring:nth-child(1){width:500px;height:500px;animation-delay:0s}
+.hero-ring:nth-child(2){width:700px;height:700px;animation-delay:1.5s}
+.hero-ring:nth-child(3){width:900px;height:900px;animation-delay:3s}
+@keyframes ringPulse { 0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:0.7;transform:scale(1.03)} }
+.particle { position:absolute; width:2px; height:2px; background:var(--gold); border-radius:50%; animation:float linear infinite; opacity:0; }
+@keyframes float { 0%{opacity:0;transform:translateY(0) translateX(0)}10%{opacity:0.8}90%{opacity:0.4}100%{opacity:0;transform:translateY(-600px) translateX(var(--drift))} }
+.hero-content { position:relative; z-index:10; text-align:center; opacity:0; animation:heroReveal 1.2s cubic-bezier(0.22,1,0.36,1) forwards; animation-delay:2.2s; padding:0 20px; }
+@keyframes heroReveal { 0%{opacity:0;transform:translateY(40px)}100%{opacity:1;transform:translateY(0)} }
+.hero-eyebrow { font-size:9px; letter-spacing:8px; text-transform:uppercase; color:var(--gold); margin-bottom:24px; display:flex; align-items:center; gap:16px; justify-content:center; }
+.hero-eyebrow::before,.hero-eyebrow::after { content:''; width:40px; height:1px; background:var(--gold); flex-shrink:0; }
+.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(64px,10vw,130px); font-weight:300; line-height:0.9; letter-spacing:-2px; color:var(--deep); }
+.hero-title em { font-style:italic; color:var(--gold-dark); }
+.hero-subtitle { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--text-muted); margin-top:28px; }
+.hero-cta { display:inline-flex; align-items:center; gap:12px; margin-top:50px; padding:16px 40px; border:1px solid var(--gold); color:var(--gold-dark); font-size:10px; letter-spacing:4px; text-transform:uppercase; text-decoration:none; position:relative; overflow:hidden; transition:color 0.4s; }
+.hero-cta::before { content:''; position:absolute; inset:0; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; z-index:-1; }
+.hero-cta:hover{color:var(--dark)}.hero-cta:hover::before{transform:scaleX(1)}
+.scroll-indicator { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeIn 1s ease forwards; animation-delay:3.5s; }
+@keyframes fadeIn{to{opacity:1}}
+.scroll-indicator span { font-size:8px; letter-spacing:4px; text-transform:uppercase; color:var(--text-muted); }
+.scroll-line { width:1px; height:50px; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom} }
 
-.hero-ring {
-  position: absolute;
-  border: 1px solid rgba(201, 169, 110, 0.18);
-  border-radius: 50%;
-  animation: ringPulse 8s ease-in-out infinite;
-}
-.hero-ring:nth-child(1) { width: 500px; height: 500px; animation-delay: 0s; }
-.hero-ring:nth-child(2) { width: 700px; height: 700px; animation-delay: 1.5s; }
-.hero-ring:nth-child(3) { width: 900px; height: 900px; animation-delay: 3s; }
-@keyframes ringPulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.03); }
-}
+/* ─── MARQUEE ─── */
+.marquee-band { background:var(--deep); padding:16px 0; overflow:hidden; }
+.marquee-track { display:flex; gap:0; animation:marquee 30s linear infinite; white-space:nowrap; }
+.marquee-item { font-size:9px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); padding:0 30px; display:flex; align-items:center; gap:30px; }
+.marquee-item::after { content:'◆'; font-size:6px; color:var(--gold-dark); }
+@keyframes marquee { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
 
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--gold);
-  border-radius: 50%;
-  animation: float linear infinite;
-  opacity: 0;
-}
-@keyframes float {
-  0% { opacity: 0; transform: translateY(0) translateX(0); }
-  10% { opacity: 0.8; }
-  90% { opacity: 0.4; }
-  100% { opacity: 0; transform: translateY(-600px) translateX(var(--drift)); }
-}
-
-.hero-content {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  opacity: 0;
-  animation: heroReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: 2.2s;
-  padding: 0 20px;
-}
-@keyframes heroReveal {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.hero-eyebrow {
-  font-size: 9px;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  justify-content: center;
-}
-.hero-eyebrow::before, .hero-eyebrow::after {
-  content: '';
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
-  flex-shrink: 0;
-}
-
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(64px, 10vw, 130px);
-  font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -2px;
-  color: var(--deep);
-}
-.hero-title em {
-  font-style: italic;
-  color: var(--gold-dark);
-}
-
-.hero-subtitle {
-  font-size: 10px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 28px;
-}
-
-.hero-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 50px;
-  padding: 16px 40px;
-  border: 1px solid var(--gold);
-  color: var(--gold-dark);
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: color 0.4s;
-}
-.hero-cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-  z-index: -1;
-}
-.hero-cta:hover { color: var(--dark); }
-.hero-cta:hover::before { transform: scaleX(1); }
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-  animation-delay: 3.5s;
-}
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-.scroll-indicator span {
-  font-size: 8px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-.scroll-line {
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
-
-/* ─── MARQUEE BAND ─── */
-.marquee-band {
-  background: var(--deep);
-  padding: 16px 0;
-  overflow: hidden;
-  position: relative;
-}
-.marquee-track {
-  display: flex;
-  gap: 0;
-  animation: marquee 30s linear infinite;
-  white-space: nowrap;
-}
-.marquee-item {
-  font-size: 9px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  padding: 0 30px;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-.marquee-item::after {
-  content: '◆';
-  font-size: 6px;
-  color: var(--gold-dark);
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ─── SECTION HEADERS ─── */
-.section-header {
-  text-align: center;
-  padding: 80px 60px 60px;
-}
-.section-eyebrow {
-  font-size: 9px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-.section-eyebrow::before, .section-eyebrow::after {
-  content: '';
-  width: 50px;
-  height: 1px;
-  background: var(--gold-light);
-}
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(38px, 5vw, 64px);
-  font-weight: 300;
-  color: var(--deep);
-  line-height: 1.1;
-}
-.section-title em {
-  font-style: italic;
-  color: var(--gold-dark);
-}
+/* ─── SECTION ─── */
+.section-header { text-align:center; padding:80px 60px 60px; }
+.section-eyebrow { font-size:9px; letter-spacing:6px; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:20px; }
+.section-eyebrow::before,.section-eyebrow::after { content:''; width:50px; height:1px; background:var(--gold-light); }
+.section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(38px,5vw,64px); font-weight:300; color:var(--deep); line-height:1.1; }
+.section-title em { font-style:italic; color:var(--gold-dark); }
 
 /* ─── CATALOG ─── */
-.catalog-wrap {
-  background: #e0d8cc;
-  padding: 2px;
-  max-width: 1400px;
-  margin: 0 auto 2px;
-}
-.catalog-inner {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-}
+.catalog-wrap { background:#e0d8cc; padding:2px; max-width:1400px; margin:0 auto 2px; }
+.catalog-inner { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
 
 /* ─── CARD ─── */
-.card {
-  background: var(--ivory);
-  overflow: hidden;
-  position: relative;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.card-img-wrap {
-  position: relative;
-  overflow: hidden;
-  height: 340px;
-  background: var(--cream);
-}
-.card-img-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(201,169,110,0.08) 0%, transparent 60%);
-  z-index: 1;
-  pointer-events: none;
-}
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.card:hover img {
-  transform: scale(1.06);
-}
+.card { background:var(--ivory); overflow:hidden; position:relative; opacity:0; transform:translateY(30px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.card.visible { opacity:1; transform:translateY(0); }
+.card-img-wrap { position:relative; overflow:hidden; height:340px; background:var(--cream); }
+.card-img-wrap::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(201,169,110,0.08) 0%,transparent 60%); z-index:1; pointer-events:none; }
+.card img { width:100%; height:100%; object-fit:cover; transition:transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.card:hover img { transform:scale(1.06); }
+.card-badge { position:absolute; top:20px; right:20px; z-index:2; width:50px; height:50px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); background:rgba(250,248,243,0.9); opacity:0; transform:scale(0.8); transition:all 0.4s ease; }
+.card:hover .card-badge { opacity:1; transform:scale(1); }
+.card-content { padding:28px 28px 36px; position:relative; }
+.card-number { font-size:9px; letter-spacing:3px; color:var(--gold); margin-bottom:8px; }
+.card-name { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--deep); letter-spacing:1px; margin-bottom:16px; line-height:1.1; }
+.card-divider { width:30px; height:1px; background:var(--gold-light); margin-bottom:16px; transition:width 0.4s ease; }
+.card:hover .card-divider { width:60px; background:var(--gold); }
+.price-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin-bottom:20px; }
+.price-item { font-size:10px; letter-spacing:1px; color:var(--text-muted); display:flex; justify-content:space-between; padding-bottom:6px; border-bottom:1px solid rgba(201,169,110,0.15); }
+.price-item span:last-child { color:var(--gold-dark); font-weight:400; }
 
-.card-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 2;
-  width: 50px;
-  height: 50px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 7px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  background: rgba(250,248,243,0.9);
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.4s ease;
-}
-.card:hover .card-badge {
-  opacity: 1;
-  transform: scale(1);
-}
+/* ─── CARD BUTTONS ROW ─── */
+.card-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:4px; }
 
-.card-content {
-  padding: 28px 28px 36px;
-  position: relative;
-}
-.card-number {
-  font-size: 9px;
-  letter-spacing: 3px;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.card-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 26px;
-  font-weight: 300;
-  color: var(--deep);
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-  line-height: 1.1;
-}
-.card-divider {
-  width: 30px;
-  height: 1px;
-  background: var(--gold-light);
-  margin-bottom: 16px;
-  transition: width 0.4s ease;
-}
-.card:hover .card-divider {
-  width: 60px;
-  background: var(--gold);
-}
+.btn-notes { display:inline-flex; align-items:center; gap:8px; font-family:'Josefin Sans',sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dark); background:none; border:none; cursor:none; padding:0; transition:gap 0.3s ease; }
+.btn-notes::after { content:'→'; transition:transform 0.3s ease; }
+.btn-notes:hover { gap:12px; }
+.btn-notes:hover::after { transform:translateX(4px); }
+.btn-notes.active::after { content:'↑'; }
 
-.price-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 12px;
-  margin-bottom: 20px;
-}
-.price-item {
-  font-size: 10px;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(201,169,110,0.15);
-}
-.price-item span:last-child {
-  color: var(--gold-dark);
-  font-weight: 400;
-}
-
-.btn-notes {
+/* ─── BUY BUTTON ─── */
+.btn-buy {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -556,255 +137,404 @@ nav {
   font-size: 9px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold-dark);
-  background: none;
-  border: none;
+  color: var(--dark);
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 10px 20px;
   cursor: none;
-  padding: 0;
-  transition: gap 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
 }
-.btn-notes::after {
-  content: '→';
-  transition: transform 0.3s ease;
+.btn-buy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: 0;
 }
-.btn-notes:hover { gap: 12px; }
-.btn-notes:hover::after { transform: translateX(4px); }
-.btn-notes.active::after { content: '↑'; }
+.btn-buy span { position: relative; z-index: 1; }
+.btn-buy:hover { color: var(--ivory); }
+.btn-buy:hover::before { transform: scaleX(1); }
+.btn-buy .buy-icon { font-size: 11px; position: relative; z-index: 1; }
 
-.notes-panel {
-  display: none;
-  margin-top: 20px;
+.notes-panel { display:none; margin-top:20px; padding:20px; background:var(--cream); border-left:2px solid var(--gold-light); animation:slideDown 0.4s ease; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)} }
+.note-group { margin-bottom:14px; }
+.note-group:last-child{margin-bottom:0}
+.note-label { font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+.note-value { font-size:11px; letter-spacing:1px; color:var(--text-mid); line-height:1.6; }
+
+/* ─── STORY ─── */
+.story-section { display:grid; grid-template-columns:1fr 1fr; min-height:600px; margin:60px 0; }
+.story-visual { background:var(--deep); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.story-visual-inner { position:relative; text-align:center; }
+.story-big-letter { font-family:'Cormorant Garamond',serif; font-size:240px; font-weight:300; color:transparent; -webkit-text-stroke:1px rgba(201,169,110,0.2); line-height:1; animation:letterFloat 6s ease-in-out infinite; }
+@keyframes letterFloat { 0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)} }
+.story-overlay-text { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.story-overlay-text span { font-family:'Cormorant Garamond',serif; font-size:40px; font-weight:300; font-style:italic; color:var(--gold-light); letter-spacing:4px; }
+.story-content { background:var(--cream); padding:80px 70px; display:flex; flex-direction:column; justify-content:center; }
+.story-content .section-eyebrow { justify-content:flex-start; }
+.story-content .section-eyebrow::before { display:none; }
+.story-heading { font-family:'Cormorant Garamond',serif; font-size:50px; font-weight:300; color:var(--deep); line-height:1.1; margin-top:20px; margin-bottom:24px; }
+.story-heading em { font-style:italic; color:var(--gold-dark); }
+.story-text { font-size:13px; line-height:2; color:var(--text-mid); letter-spacing:0.5px; max-width:460px; }
+.story-stats { display:flex; gap:48px; margin-top:40px; }
+.stat-num { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:300; color:var(--gold-dark); }
+.stat-label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--text-muted); margin-top:4px; }
+
+/* ─── FOOTER ─── */
+footer { background:var(--deep); color:var(--gold-light); text-align:center; padding:80px 60px; position:relative; overflow:hidden; }
+footer::before { content:'JOUDAR'; position:absolute; bottom:-30px; left:50%; transform:translateX(-50%); font-family:'Cormorant Garamond',serif; font-size:120px; font-weight:300; color:transparent; -webkit-text-stroke:1px rgba(201,169,110,0.08); white-space:nowrap; }
+.footer-logo { font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:300; letter-spacing:16px; color:var(--gold); margin-bottom:12px; }
+.footer-tagline { font-size:9px; letter-spacing:5px; text-transform:uppercase; color:var(--gold-dark); margin-bottom:50px; }
+.footer-divider { width:1px; height:50px; background:linear-gradient(to bottom,var(--gold),transparent); margin:0 auto 40px; }
+.footer-insta { display:inline-flex; align-items:center; gap:12px; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold-light); text-decoration:none; transition:color 0.3s; }
+.footer-insta:hover{color:var(--gold)}
+.footer-insta-icon { width:32px; height:32px; border:1px solid var(--gold-dark); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; transition:all 0.3s; }
+.footer-insta:hover .footer-insta-icon { background:var(--gold); border-color:var(--gold); color:var(--dark); }
+.footer-copy { margin-top:50px; font-size:9px; letter-spacing:3px; color:rgba(201,169,110,0.3); }
+
+.reveal { opacity:0; transform:translateY(40px); transition:opacity 0.9s ease,transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ══════════════════════════════════════
+   CHECKOUT MODAL
+══════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
-  background: var(--cream);
-  border-left: 2px solid var(--gold-light);
-  animation: slideDown 0.4s ease;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  cursor: auto;
 }
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
 }
-.note-group {
-  margin-bottom: 14px;
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 14, 8, 0.85);
+  backdrop-filter: blur(8px);
 }
-.note-group:last-child { margin-bottom: 0; }
-.note-label {
+.modal-box {
+  position: relative;
+  z-index: 1;
+  background: var(--ivory);
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  transform: translateY(30px) scale(0.97);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+.modal-overlay.open .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+/* Product Preview Panel */
+.modal-product {
+  background: var(--deep);
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+}
+.modal-product::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.modal-product-img {
+  width: 160px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(201,169,110,0.2);
+}
+.modal-product-num {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--gold-dark);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.modal-product-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+.modal-size-label {
   font-size: 8px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-.note-value {
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--text-mid);
-  line-height: 1.6;
-}
-
-/* ─── STORY SECTION ─── */
-.story-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 600px;
-  margin: 60px 0;
-}
-.story-visual {
-  background: var(--deep);
+  color: var(--gold-dark);
+  margin-bottom: 10px;
   position: relative;
-  overflow: hidden;
+  z-index: 1;
+}
+.modal-sizes {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   justify-content: center;
-}
-.story-visual-inner {
+  margin-bottom: 20px;
   position: relative;
+  z-index: 1;
+}
+.size-pill {
+  padding: 6px 12px;
+  border: 1px solid rgba(201,169,110,0.3);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-light);
+  cursor: pointer;
+  transition: all 0.25s;
   text-align: center;
 }
-.story-big-letter {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 240px;
-  font-weight: 300;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(201,169,110,0.2);
-  line-height: 1;
-  animation: letterFloat 6s ease-in-out infinite;
-}
-@keyframes letterFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-.story-overlay-text {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.story-overlay-text span {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 40px;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--gold-light);
-  letter-spacing: 4px;
-}
-.story-content {
-  background: var(--cream);
-  padding: 80px 70px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.story-content .section-eyebrow {
-  justify-content: flex-start;
-}
-.story-content .section-eyebrow::before { display: none; }
-.story-heading {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 50px;
-  font-weight: 300;
-  color: var(--deep);
-  line-height: 1.1;
-  margin-top: 20px;
-  margin-bottom: 24px;
-}
-.story-heading em { font-style: italic; color: var(--gold-dark); }
-.story-text {
-  font-size: 13px;
-  line-height: 2;
-  color: var(--text-mid);
-  letter-spacing: 0.5px;
-  max-width: 460px;
-}
-.story-stats {
-  display: flex;
-  gap: 48px;
-  margin-top: 40px;
-}
-.stat-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 42px;
-  font-weight: 300;
-  color: var(--gold-dark);
-}
-.stat-label {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-/* ─── FOOTER ─── */
-footer {
-  background: var(--deep);
-  color: var(--gold-light);
-  text-align: center;
-  padding: 80px 60px;
-  position: relative;
-  overflow: hidden;
-}
-footer::before {
-  content: 'JOUDAR';
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 120px;
-  font-weight: 300;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(201,169,110,0.08);
-  white-space: nowrap;
-}
-.footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 48px;
-  font-weight: 300;
-  letter-spacing: 16px;
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-.footer-tagline {
-  font-size: 9px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--gold-dark);
-  margin-bottom: 50px;
-}
-.footer-divider {
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  margin: 0 auto 40px;
-}
-.footer-insta {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.footer-insta:hover { color: var(--gold); }
-.footer-insta-icon {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--gold-dark);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  transition: all 0.3s;
-}
-.footer-insta:hover .footer-insta-icon {
+.size-pill:hover,
+.size-pill.selected {
   background: var(--gold);
   border-color: var(--gold);
   color: var(--dark);
 }
-.footer-copy {
-  margin-top: 50px;
+.modal-selected-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--gold);
+  position: relative;
+  z-index: 1;
+  margin-top: 4px;
+}
+.modal-note-preview {
+  margin-top: 20px;
+  border-top: 1px solid rgba(201,169,110,0.15);
+  padding-top: 16px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.modal-note-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.modal-note-k {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.modal-note-v {
   font-size: 9px;
-  letter-spacing: 3px;
-  color: rgba(201,169,110,0.3);
+  color: rgba(201,169,110,0.6);
+  text-align: right;
+  line-height: 1.4;
 }
 
-/* ─── REVEAL ─── */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+/* Form Panel */
+.modal-form-panel {
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.modal-header {
+  margin-bottom: 28px;
 }
+.modal-eyebrow {
+  font-size: 8px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--deep);
+  line-height: 1.1;
+}
+.modal-title em { font-style: italic; color: var(--gold-dark); }
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-muted);
+  cursor: pointer;
+  z-index: 10;
+  line-height: 1;
+  transition: color 0.2s;
+  font-family: 'Josefin Sans', sans-serif;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-close:hover { color: var(--gold-dark); }
+
+.form-group {
+  margin-bottom: 18px;
+}
+.form-label {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: 6px;
+}
+.form-input,
+.form-textarea {
+  width: 100%;
+  background: var(--cream);
+  border: 1px solid rgba(201,169,110,0.25);
+  padding: 12px 14px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--deep);
+  outline: none;
+  transition: border-color 0.3s;
+  font-weight: 300;
+}
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--gold);
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-muted);
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.modal-proceed-btn {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--deep);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 14px 28px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.35s;
+  width: 100%;
+  justify-content: center;
+}
+.btn-whatsapp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+  z-index: 0;
+}
+.btn-whatsapp:hover { color: var(--dark); }
+.btn-whatsapp:hover::before { transform: scaleX(1); }
+.btn-whatsapp span, .btn-whatsapp .wa-icon { position: relative; z-index: 1; }
+.wa-icon { font-size: 16px; }
+.form-note {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  text-align: center;
+  line-height: 1.6;
+}
+.size-required-msg {
+  font-size: 9px;
+  color: #c0392b;
+  letter-spacing: 1px;
+  margin-top: 6px;
+  display: none;
+}
+
+/* scrollbar for modal */
+.modal-box::-webkit-scrollbar { width: 4px; }
+.modal-box::-webkit-scrollbar-track { background: var(--cream); }
+.modal-box::-webkit-scrollbar-thumb { background: var(--gold-light); }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1024px) {
-  .catalog-inner { grid-template-columns: repeat(2, 1fr); }
-  nav { padding: 20px 30px; }
-  .nav-links { display: none; }
-  .story-section { grid-template-columns: 1fr; }
-  .story-visual { min-height: 300px; }
+  .catalog-inner { grid-template-columns: repeat(2,1fr); }
+  nav { padding:20px 30px; }
+  .nav-links { display:none; }
+  .story-section { grid-template-columns:1fr; }
+  .story-visual { min-height:300px; }
+}
+@media (max-width: 700px) {
+  .modal-box { grid-template-columns: 1fr; }
+  .modal-product { display: none; }
+  .modal-form-panel { padding: 32px 24px; }
 }
 @media (max-width: 640px) {
-  .catalog-inner { grid-template-columns: 1fr; }
-  .hero-title { font-size: 52px; }
-  .story-content { padding: 50px 30px; }
-  .story-stats { flex-wrap: wrap; gap: 24px; }
-  footer { padding: 60px 30px; }
-  .hero-eyebrow { font-size: 8px; letter-spacing: 4px; gap: 10px; }
-  .hero-eyebrow::before, .hero-eyebrow::after { width: 20px; }
-  .hero-subtitle { letter-spacing: 3px; }
-  .hero-cta { padding: 14px 28px; font-size: 9px; letter-spacing: 3px; }
-  nav { padding: 16px 20px; }
-  .nav-logo { font-size: 22px; letter-spacing: 6px; }
+  .catalog-inner { grid-template-columns:1fr; }
+  .hero-title { font-size:52px; }
+  .story-content { padding:50px 30px; }
+  .story-stats { flex-wrap:wrap; gap:24px; }
+  footer { padding:60px 30px; }
+  nav { padding:16px 20px; }
+  .nav-logo { font-size:22px; letter-spacing:6px; }
+  .form-row { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -869,22 +599,11 @@ footer::before {
   <div class="story-content">
     <div class="section-eyebrow">Our Philosophy</div>
     <h2 class="story-heading">Born from the<br><em>Essence</em> of Arabia</h2>
-    <p class="story-text">
-      Joudar Perfumes was born from a deep reverence for the ancient art of Arabian fragrance. Every bottle is a testament to the rare ingredients sourced from the finest corners of the world — from the agarwood forests of Southeast Asia to the rose valleys of Bulgaria.
-    </p>
+    <p class="story-text">Joudar Perfumes was born from a deep reverence for the ancient art of Arabian fragrance. Every bottle is a testament to the rare ingredients sourced from the finest corners of the world — from the agarwood forests of Southeast Asia to the rose valleys of Bulgaria.</p>
     <div class="story-stats">
-      <div class="stat-item">
-        <div class="stat-num">18+</div>
-        <div class="stat-label">Signatures</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Pure Oils</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Years of Craft</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">18+</div><div class="stat-label">Signatures</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Pure Oils</div></div>
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Years of Craft</div></div>
     </div>
   </div>
 </section>
@@ -900,156 +619,103 @@ footer::before {
   <div class="footer-copy">© 2025 Joudar Perfumes · Kozhikode, Kerala</div>
 </footer>
 
+<!-- ══════════════ CHECKOUT MODAL ══════════════ -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-box">
+    <!-- Left: Product Preview -->
+    <div class="modal-product" id="modalProduct">
+      <img class="modal-product-img" id="modalImg" src="" alt="">
+      <div class="modal-product-num" id="modalNum"></div>
+      <div class="modal-product-name" id="modalName"></div>
+      <div class="modal-size-label">Select Size</div>
+      <div class="modal-sizes" id="modalSizes"></div>
+      <div class="modal-selected-price" id="modalPrice">—</div>
+      <div class="modal-note-preview" id="modalNotes"></div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="modal-form-panel">
+      <button class="modal-close" id="modalClose" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-eyebrow">Place Your Order</div>
+        <h2 class="modal-title">Deliver the<br><em>Essence</em></h2>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" id="fieldName" type="text" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone / WhatsApp Number</label>
+        <input class="form-input" id="fieldPhone" type="tel" placeholder="+91 98765 43210">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Delivery Address</label>
+        <textarea class="form-textarea" id="fieldAddress" placeholder="House / Flat no., Street, Area, Landmark..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <input class="form-input" id="fieldCity" type="text" placeholder="City">
+        </div>
+        <div class="form-group">
+          <label class="form-label">PIN Code</label>
+          <input class="form-input" id="fieldPin" type="text" placeholder="PIN">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">State</label>
+        <input class="form-input" id="fieldState" type="text" placeholder="State" value="Kerala">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Special Note (optional)</label>
+        <input class="form-input" id="fieldNote" type="text" placeholder="Any special instructions?">
+      </div>
+
+      <div class="size-required-msg" id="sizeMsg">⚠ Please select a size before proceeding.</div>
+
+      <div class="modal-proceed-btn">
+        <button class="btn-whatsapp" onclick="proceedToWhatsApp()">
+          <span class="wa-icon">💬</span>
+          <span>Send Order via WhatsApp</span>
+        </button>
+      </div>
+      <p class="form-note">Tapping the button will open WhatsApp with your order details pre-filled for confirmation.</p>
+    </div>
+  </div>
+</div>
+
 <script>
+const WHATSAPP_NUMBER = '919895XXXXXX'; // ← Replace with Joudar's WhatsApp number (country code + number, no + sign)
+
 const perfumes = [
-  {
-    name: "Red Wood",
-    img: "images/redwood.png",
-    top: "Raspberry, Coffee Beans",
-    heart: "Red Rose",
-    base: "Tamarind, Agarwood",
-    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
-  },
-  {
-    name: "Dream Soul",
-    img: "images/dreamsoul.png",
-    top: "Lemon, Mint",
-    heart: "Agarwood",
-    base: "Cardamom, White Musk",
-    prices: { "20ML": "₹399", "30ML": "₹599", "50ML": "₹999", "100ML": "₹1899" }
-  },
-  {
-    name: "Blue Mist",
-    img: "images/blue mist.png",
-    top: "Aquatic Notes, Citrus",
-    heart: "Violet, Iris",
-    base: "Cedarwood, Musk",
-    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1349" }
-  },
-  {
-    name: "Burberry Aura",
-    img: "images/burbery.png",
-    top: "Raspberry, Coffee Beans",
-    heart: "Red Rose",
-    base: "Tamarind, Agarwood",
-    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
-  },
-  {
-    name: "Lavender Oudh",
-    img: "images/lavender.png",
-    top: "Lavender, Bergamot",
-    heart: "Oud, Patchouli",
-    base: "Sandalwood, Amber",
-    prices: { "20ML": "₹399", "30ML": "₹599", "50ML": "₹899", "100ML": "₹1799" }
-  },
-  {
-    name: "Apple Eaze",
-    img: "images/apple eaze.png",
-    top: "Apple, Citrus",
-    heart: "Jasmine, Peach",
-    base: "Musk, Vanilla",
-    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
-  },
-  {
-    name: "Coco Blast",
-    img: "images/cocoblast (2).png",
-    top: "Coconut, Citrus",
-    heart: "Tiare Flower",
-    base: "Sandalwood, Vanilla",
-    prices: { "20ML": "₹449", "30ML": "₹649", "50ML": "₹1099", "100ML": "₹1999" }
-  },
-  {
-    name: "One",
-    img: "images/one.png",
-    top: "Bergamot, Lemon",
-    heart: "Rose, Jasmine",
-    base: "Musk, Cedarwood",
-    prices: { "20ML": "₹299", "30ML": "₹449", "50ML": "₹749", "100ML": "₹1399" }
-  },
-  {
-    name: "Imperial",
-    img: "images/Imperial (2).png",
-    top: "Saffron, Cardamom",
-    heart: "Agarwood, Rose",
-    base: "Amber, Sandalwood",
-    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
-  },
-  {
-    name: "Fruit Maxio",
-    img: "images/fruit maxio.png",
-    top: "Raspberry, Coffee Beans",
-    heart: "Red Rose",
-    base: "Tamarind, Agarwood",
-    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
-  },
-  {
-    name: "Wadi",
-    img: "images/wadi.png",
-    top: "Raspberry, Coffee Beans",
-    heart: "Red Rose",
-    base: "Tamarind, Agarwood",
-    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
-  },
-  {
-    name: "Oakridge",
-    img: "images/Oakridge.png",
-    top: "Saffron, Bergamot",
-    heart: "Agarwood, Bulgarian Rose",
-    base: "Tonka Beans, Amber, White Musk",
-    prices: { "20ML": "₹649", "30ML": "₹999", "50ML": "₹1499", "100ML": "₹2799" }
-  },
-  {
-    name: "Noir Dessert",
-    img: "images/Noir Dessert.png",
-    top: "Black Tea, White Musk",
-    heart: "Iris, Vanilla",
-    base: "Cedarwood, Coumarin, Amber",
-    prices: { "20ML": "₹699", "30ML": "₹1099", "50ML": "₹1699", "100ML": "₹3199" }
-  },
-  {
-    name: "Farz",
-    img: "images/Farz.png",
-    top: "Grapefruit, Mandarin Orange",
-    heart: "Agarwood",
-    base: "Guaiac Wood",
-    prices: { "20ML": "₹349", "30ML": "₹499", "50ML": "₹799", "100ML": "₹1499" }
-  },
-  {
-    name: "Aqua Mist",
-    img: "images/Aqua mist.png",
-    top: "Oakmoss, Sandalwood",
-    heart: "Musk, Amber",
-    base: "Geranium",
-    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1399" }
-  },
-  {
-    name: "Orchid Bloom",
-    img: "images/BrownOrchid.png",
-    top: "Jasmine, Black Currant",
-    heart: "Patchouli, Sandalwood, Dark Chocolate",
-    base: "Amber, Vanilla",
-    prices: { "20ML": "₹329", "30ML": "₹499", "50ML": "₹749", "100ML": "₹1349" }
-  },
-  {
-    name: "Black Lexus",
-    img: "images/black lexus.png",
-    top: "Mango, Blood Orange",
-    heart: "Water Lily, Peony",
-    base: "Coconut, White Musk",
-    prices: { "20ML": "₹249", "30ML": "₹399", "50ML": "₹649", "100ML": "₹1199" }
-  },
-  {
-    name: "Eco Forest",
-    img: "images/Eco forest.png",
-    top: "Tangerine, Lemon, Bergamot",
-    heart: "Mint, Jasmine",
-    base: "Orange Blossom, Ginger",
-    prices: { "20ML": "₹249", "30ML": "₹399", "50ML": "₹649", "100ML": "₹1199" }
-  }
+  { name:"Red Wood", img:"images/redwood.png", top:"Raspberry, Coffee Beans", heart:"Red Rose", base:"Tamarind, Agarwood", prices:{"20ML":"₹329","30ML":"₹499","50ML":"₹749","100ML":"₹1399"} },
+  { name:"Dream Soul", img:"images/dreamsoul.png", top:"Lemon, Mint", heart:"Agarwood", base:"Cardamom, White Musk", prices:{"20ML":"₹399","30ML":"₹599","50ML":"₹999","100ML":"₹1899"} },
+  { name:"Blue Mist", img:"images/blue mist.png", top:"Aquatic Notes, Citrus", heart:"Violet, Iris", base:"Cedarwood, Musk", prices:{"20ML":"₹329","30ML":"₹499","50ML":"₹749","100ML":"₹1349"} },
+  { name:"Burberry Aura", img:"images/burbery.png", top:"Raspberry, Coffee Beans", heart:"Red Rose", base:"Tamarind, Agarwood", prices:{"20ML":"₹349","30ML":"₹499","50ML":"₹799","100ML":"₹1499"} },
+  { name:"Lavender Oudh", img:"images/lavender.png", top:"Lavender, Bergamot", heart:"Oud, Patchouli", base:"Sandalwood, Amber", prices:{"20ML":"₹399","30ML":"₹599","50ML":"₹899","100ML":"₹1799"} },
+  { name:"Apple Eaze", img:"images/apple eaze.png", top:"Apple, Citrus", heart:"Jasmine, Peach", base:"Musk, Vanilla", prices:{"20ML":"₹329","30ML":"₹499","50ML":"₹749","100ML":"₹1399"} },
+  { name:"Coco Blast", img:"images/cocoblast (2).png", top:"Coconut, Citrus", heart:"Tiare Flower", base:"Sandalwood, Vanilla", prices:{"20ML":"₹449","30ML":"₹649","50ML":"₹1099","100ML":"₹1999"} },
+  { name:"One", img:"images/one.png", top:"Bergamot, Lemon", heart:"Rose, Jasmine", base:"Musk, Cedarwood", prices:{"20ML":"₹299","30ML":"₹449","50ML":"₹749","100ML":"₹1399"} },
+  { name:"Imperial", img:"images/Imperial (2).png", top:"Saffron, Cardamom", heart:"Agarwood, Rose", base:"Amber, Sandalwood", prices:{"20ML":"₹349","30ML":"₹499","50ML":"₹799","100ML":"₹1499"} },
+  { name:"Fruit Maxio", img:"images/fruit maxio.png", top:"Raspberry, Coffee Beans", heart:"Red Rose", base:"Tamarind, Agarwood", prices:{"20ML":"₹329","30ML":"₹499","50ML":"₹749","100ML":"₹1399"} },
+  { name:"Wadi", img:"images/wadi.png", top:"Raspberry, Coffee Beans", heart:"Red Rose", base:"Tamarind, Agarwood", prices:{"20ML":"₹349","30ML":"₹499","50ML":"₹799","100ML":"₹1499"} },
+  { name:"Oakridge", img:"images/Oakridge.png", top:"Saffron, Bergamot", heart:"Agarwood, Bulgarian Rose", base:"Tonka Beans, Amber, White Musk", prices:{"20ML":"₹649","30ML":"₹999","50ML":"₹1499","100ML":"₹2799"} },
+  { name:"Noir Dessert", img:"images/Noir Dessert.png", top:"Black Tea, White Musk", heart:"Iris, Vanilla", base:"Cedarwood, Coumarin, Amber", prices:{"20ML":"₹699","30ML":"₹1099","50ML":"₹1699","100ML":"₹3199"} },
+  { name:"Farz", img:"images/Farz.png", top:"Grapefruit, Mandarin Orange", heart:"Agarwood", base:"Guaiac Wood", prices:{"20ML":"₹349","30ML":"₹499","50ML":"₹799","100ML":"₹1499"} },
+  { name:"Aqua Mist", img:"images/Aqua mist.png", top:"Oakmoss, Sandalwood", heart:"Musk, Amber", base:"Geranium", prices:{"20ML":"₹329","30ML":"₹499","50ML":"₹749","100ML":"₹1399"} },
+  { name:"Orchid Bloom", img:"images/BrownOrchid.png", top:"Jasmine, Black Currant", heart:"Patchouli, Sandalwood, Dark Chocolate", base:"Amber, Vanilla", prices:{"20ML":"₹329","30ML":"₹499","50ML":"₹749","100ML":"₹1349"} },
+  { name:"Black Lexus", img:"images/black lexus.png", top:"Mango, Blood Orange", heart:"Water Lily, Peony", base:"Coconut, White Musk", prices:{"20ML":"₹249","30ML":"₹399","50ML":"₹649","100ML":"₹1199"} },
+  { name:"Eco Forest", img:"images/Eco forest.png", top:"Tangerine, Lemon, Bergamot", heart:"Mint, Jasmine", base:"Orange Blossom, Ginger", prices:{"20ML":"₹249","30ML":"₹399","50ML":"₹649","100ML":"₹1199"} }
 ];
 
-const grid = document.getElementById('catalogGrid');
+// Active product for modal
+let activeProduct = null;
+let selectedSize = null;
 
+/* ── Build Catalog ── */
+const grid = document.getElementById('catalogGrid');
 perfumes.forEach((p, i) => {
   const card = document.createElement('div');
   card.className = 'card';
@@ -1066,91 +732,196 @@ perfumes.forEach((p, i) => {
       <div class="card-name">${p.name}</div>
       <div class="card-divider"></div>
       <div class="price-grid">${priceHTML}</div>
-      <button class="btn-notes" onclick="toggleNotes(this)">View Notes</button>
+      <div class="card-actions">
+        <button class="btn-notes" onclick="toggleNotes(this)">View Notes</button>
+        <button class="btn-buy" onclick="openCheckout(${i})">
+          <span class="buy-icon">🛍</span>
+          <span>Buy Now</span>
+        </button>
+      </div>
       <div class="notes-panel">
-        <div class="note-group">
-          <div class="note-label">Top Notes</div>
-          <div class="note-value">${p.top}</div>
-        </div>
-        <div class="note-group">
-          <div class="note-label">Heart Notes</div>
-          <div class="note-value">${p.heart}</div>
-        </div>
-        <div class="note-group">
-          <div class="note-label">Base Notes</div>
-          <div class="note-value">${p.base}</div>
-        </div>
+        <div class="note-group"><div class="note-label">Top Notes</div><div class="note-value">${p.top}</div></div>
+        <div class="note-group"><div class="note-label">Heart Notes</div><div class="note-value">${p.heart}</div></div>
+        <div class="note-group"><div class="note-label">Base Notes</div><div class="note-value">${p.base}</div></div>
       </div>
     </div>
   `;
   grid.appendChild(card);
 });
 
+/* ── Marquee ── */
 const marqueeItems = ['Luxury Fragrances','Arabian Perfumery','Pure Oud Oils','Handcrafted Blends','Rare Ingredients','Free Shipping Available','Authentic Attars','Premium Quality'];
 const track = document.getElementById('marqueeTrack');
-const repeated = [...marqueeItems, ...marqueeItems, ...marqueeItems];
-repeated.forEach(item => {
+[...marqueeItems,...marqueeItems,...marqueeItems].forEach(item => {
   const el = document.createElement('span');
   el.className = 'marquee-item';
   el.textContent = item;
   track.appendChild(el);
 });
 
+/* ── Custom Cursor ── */
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function animateCursor() {
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{mx=e.clientX;my=e.clientY;});
+(function animateCursor(){
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
   requestAnimationFrame(animateCursor);
 })();
 
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hide');
-  }, 2800);
+/* ── Loader ── */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{ document.getElementById('loader').classList.add('hide'); }, 2800);
 });
 
+/* ── Notes toggle ── */
 function toggleNotes(btn) {
-  const panel = btn.nextElementSibling;
+  const panel = btn.closest('.card-actions').nextElementSibling;
   const isOpen = panel.style.display === 'block';
   panel.style.display = isOpen ? 'none' : 'block';
   btn.textContent = isOpen ? 'View Notes' : 'Hide Notes';
   btn.classList.toggle('active', !isOpen);
 }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, entry.target.dataset.delay || 0);
+/* ── Intersection Observer ── */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      setTimeout(()=>entry.target.classList.add('visible'), entry.target.dataset.delay||0);
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('.card').forEach((card,i)=>{card.dataset.delay=(i%3)*120;observer.observe(card);});
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-document.querySelectorAll('.card').forEach((card, i) => {
-  card.dataset.delay = (i % 3) * 120;
-  observer.observe(card);
-});
-
+/* ── Particles ── */
 const hero = document.querySelector('.hero');
-for (let i = 0; i < 24; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  const x = Math.random() * 100;
-  const dur = 8 + Math.random() * 12;
-  const delay = Math.random() * 10;
-  const drift = (Math.random() - 0.5) * 100;
-  p.style.cssText = `left:${x}%;bottom:0;--drift:${drift}px;animation-duration:${dur}s;animation-delay:${delay}s;`;
+for(let i=0;i<24;i++){
+  const p=document.createElement('div'); p.className='particle';
+  const x=Math.random()*100, dur=8+Math.random()*12, delay=Math.random()*10, drift=(Math.random()-0.5)*100;
+  p.style.cssText=`left:${x}%;bottom:0;--drift:${drift}px;animation-duration:${dur}s;animation-delay:${delay}s;`;
   hero.appendChild(p);
+}
+
+/* ══════════════ MODAL LOGIC ══════════════ */
+function openCheckout(idx) {
+  activeProduct = perfumes[idx];
+  selectedSize = null;
+
+  // Populate product panel
+  document.getElementById('modalImg').src = activeProduct.img;
+  document.getElementById('modalImg').alt = activeProduct.name;
+  document.getElementById('modalNum').textContent = 'No.' + String(idx+1).padStart(2,'0');
+  document.getElementById('modalName').textContent = activeProduct.name;
+  document.getElementById('modalPrice').textContent = '— Select a size';
+
+  // Sizes
+  const sizesEl = document.getElementById('modalSizes');
+  sizesEl.innerHTML = '';
+  Object.entries(activeProduct.prices).forEach(([ml, price]) => {
+    const pill = document.createElement('div');
+    pill.className = 'size-pill';
+    pill.innerHTML = `<div>${ml}</div><div style="font-size:8px;margin-top:2px;color:var(--gold-dark)">${price}</div>`;
+    pill.onclick = () => {
+      document.querySelectorAll('.size-pill').forEach(p=>p.classList.remove('selected'));
+      pill.classList.add('selected');
+      selectedSize = { ml, price };
+      document.getElementById('modalPrice').textContent = `${ml} — ${price}`;
+      document.getElementById('sizeMsg').style.display = 'none';
+    };
+    sizesEl.appendChild(pill);
+  });
+
+  // Notes preview
+  const notesEl = document.getElementById('modalNotes');
+  notesEl.innerHTML = `
+    <div class="modal-note-row"><span class="modal-note-k">Top</span><span class="modal-note-v">${activeProduct.top}</span></div>
+    <div class="modal-note-row"><span class="modal-note-k">Heart</span><span class="modal-note-v">${activeProduct.heart}</span></div>
+    <div class="modal-note-row"><span class="modal-note-k">Base</span><span class="modal-note-v">${activeProduct.base}</span></div>
+  `;
+
+  // Clear form
+  ['fieldName','fieldPhone','fieldAddress','fieldCity','fieldPin','fieldState','fieldNote'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(id === 'fieldState') el.value = 'Kerala';
+    else el.value = '';
+  });
+  document.getElementById('sizeMsg').style.display = 'none';
+
+  document.getElementById('checkoutModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+function proceedToWhatsApp() {
+  if (!selectedSize) {
+    document.getElementById('sizeMsg').style.display = 'block';
+    return;
+  }
+
+  const name    = document.getElementById('fieldName').value.trim();
+  const phone   = document.getElementById('fieldPhone').value.trim();
+  const address = document.getElementById('fieldAddress').value.trim();
+  const city    = document.getElementById('fieldCity').value.trim();
+  const pin     = document.getElementById('fieldPin').value.trim();
+  const state   = document.getElementById('fieldState').value.trim();
+  const note    = document.getElementById('fieldNote').value.trim();
+
+  if (!name || !phone || !address || !city || !pin) {
+    alert('Please fill in all required fields before proceeding.');
+    return;
+  }
+
+  const p = activeProduct;
+
+  // All prices formatted
+  const allPrices = Object.entries(p.prices).map(([ml,pr])=>`  ${ml}: ${pr}`).join('\n');
+
+  const msg = 
+`🌟 *NEW ORDER — JOUDAR PERFUMES* 🌟
+
+━━━━━━━━━━━━━━━━━━━━━━
+🧴 *PRODUCT DETAILS*
+━━━━━━━━━━━━━━━━━━━━━━
+Perfume: *${p.name}*
+Selected Size: *${selectedSize.ml}*
+Price: *${selectedSize.price}*
+
+🎵 Fragrance Notes:
+  Top    → ${p.top}
+  Heart  → ${p.heart}
+  Base   → ${p.base}
+
+💰 All Available Sizes:
+${allPrices}
+
+━━━━━━━━━━━━━━━━━━━━━━
+👤 *CUSTOMER DETAILS*
+━━━━━━━━━━━━━━━━━━━━━━
+Name: ${name}
+Phone: ${phone}
+
+📦 *DELIVERY ADDRESS*
+${address}
+${city}, ${state} — ${pin}
+${note ? `\n📝 Note: ${note}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━━━
+Please confirm availability and share payment details. Thank you! 🙏`;
+
+  const encoded = encodeURIComponent(msg);
+  const waURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+  window.open(waURL, '_blank');
 }
 </script>
 </body>
